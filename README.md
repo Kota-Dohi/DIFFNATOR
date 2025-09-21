@@ -3,7 +3,7 @@
 > Notes: The details that the paper states are “provided on the project page”—such as the duration bounds of component functions, the sampling ranges for each parameter, and the offset/ratio modification rules—are organized as dedicated sections below in Data → Component Functions and Data → Parameter Ranges & Modification Rules.
 
 <p align="center">
-  <img src="docs/teaser.png" alt="DiffNator Teaser (reference vs target with JSON output)" width="75%">
+  <img src="teaser.png" alt="DiffNator Teaser (reference vs target with JSON output)" width="75%">
 </p>
 
 ## Summary
