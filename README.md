@@ -276,16 +276,31 @@ All model outputs must conform to this schema (also in `diffnator/schema/diffnat
 ### Prompt template
 ```text
 inst_part1:
-Task: You are a time-series difference explainer. Input:
+    <s>[INST]
+    Task: You are a time-series difference explainer. 
+    Input: 
 
 [TS_EMBEDDING_INSERTED_HERE]
 
 inst_part2:
-Output strictly valid JSON list of objects with fields: type, func, start, end,
-presence (Type1 only), param & magnitude (Type2 only).
+    Output: List of differences in JSON format. Each difference must match schema:
+    [{
+      "type": "type1" | "type2",
+      "func": "LINEAR_INCREASE" | "LINEAR_DECREASE" | "QUADRATIC_INCREASE" | "QUADRATIC_DECREASE" | "CUBIC_INCREASE" | "CUBIC_DECREASE" | "EXPONENTIAL_GROWTH" | "INVERTED_EXPONENTIAL_GROWTH" | "EXPONENTIAL_DECAY" | "INVERTED_EXPONENTIAL_DECAY" | "LOG_INCREASE" | "LOG_DECREASE" | "SIGMOID" | "INVERTED_SIGMOID" | "GAUSSIAN" | "INVERTED_GAUSSIAN" | "SINUSOIDAL" | "SAWTOOTH" | "SQUARE_WAVE" | "TRIANGLE_WAVE" | "GAUSSIAN_NOISE" | "LAPLACE_NOISE" | "SPIKE" | "DROP" | "POSITIVE_STEP" | "NEGATIVE_STEP" | "POSITIVE_PULSE" | "NEGATIVE_PULSE",
+      "start": int, 
+      "end": int,
+      "presence": null | "PRESENT" | "ABSENT", 
+      "param": null | "amplitude" | "frequency" | "scale" | "magnitude" | "width" | "center" | "steepness" | "midpoint" | "growth_rate" | "decay_rate" | "slope",
+      "magnitude": null | "LARGER" | "SMALLER" 
+    },
+    ...
+    ]
+
+    Rule: Each difference should be in strictly valid JSON format.[/INST]
 
 question:
-Explain the differences between the two time-series data.
+    Explain the differences between the reference and target time-series data by generating the JSON list.
+
 ```
 
 ---
